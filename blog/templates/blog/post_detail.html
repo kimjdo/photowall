@@ -45,9 +45,21 @@ $(function() {
           <hr>
           <div class = "post-map"></div>
           {{ post.content|linebreaks }}
-        </div>
+          </div>
+          <hr>
+          <ul>
+          {% for comment in post.comment_set.all %}
+            <li>{{ comment.message }} by {{ comment.auther }} at {{ comment.created_at }}
+            {% if comment.author == request.user %}
+            <a href="{{ comment.get_edit_url }}" class ="btn btn-default">수정</a> |
+            <a href="{{ comment.get_delete_url }}" calss="text-danger">삭제</a>
+            {% endif %}
+            </li>
+          {% endfor %}
+          </ul>
         <div class="panel-footer">
-          <a href="{% url 'index' %}" class ="btn btn-default">목록으로</a>
+          <a href="{% url 'index' %}" class ="btn btn-primary">목록으로</a>
+          <a href="{% url 'comment_new' post.pk %}" class ="btn btn-primary">댓글쓰기</a>
         </div>
       </div>
     </div>

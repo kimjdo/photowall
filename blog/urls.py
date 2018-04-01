@@ -19,5 +19,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name = 'index'),
     path('<int:pk>/', views.post_detail, name = 'post_detail'),
-
+    path('<int:post_pk>/comment/new', views.comment_new, name = 'comment_new'),
+    path('<int:post_pk>/comment/<int:pk>/edit/', views.comment_edit, name = 'comment_edit'),
+    path('<int:post_pk>/comment/<int:pk>/on_delete/', views.comment_delete, name = 'comment_delete'),
 ]
